@@ -9,6 +9,8 @@ encoding = 'UTF8'
 lc_collate = 'pt_BR.UTF-8' 
 lc_ctype = 'pt_BR.UTF-8';
 
+\connect uvv guilherme
+
 CREATE SCHEMA IF NOT EXISTS hr
     AUTHORIZATION guilherme;
 
