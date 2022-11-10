@@ -24,14 +24,14 @@ CREATE TABLE cargos (
                 salario_maximo DECIMAL(8,2),
                 PRIMARY KEY (id_cargo)
 );
-
+comment on table cargos is 'tabela cargos';
 
 CREATE TABLE regioes (
                 Id_regiao VARCHAR NOT NULL,
                 nome VARCHAR(25) NOT NULL,
                 PRIMARY KEY (Id_regiao)
 );
-
+comment on table regioes is 'tabela regioes';
 
 CREATE TABLE paises (
                 id_pais CHAR(2) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE paises (
                 Id_regiao VARCHAR NOT NULL,
                 PRIMARY KEY (id_pais)
 );
-
+comment on table paises is 'tabela paises';
 
 CREATE UNIQUE INDEX paises_idx
  ON paises
@@ -55,6 +55,7 @@ CREATE TABLE localizacoes (
                 PRIMARY KEY (id_localizacoes)
 );
 
+comment on table localizacoes is 'tabela localizacoes';
 
 CREATE TABLE departamentos (
                 id_departamento INT NOT NULL,
@@ -63,6 +64,8 @@ CREATE TABLE departamentos (
                 id_gerente INT,
                 PRIMARY KEY (id_departamento)
 );
+
+comment on table departamentos is 'tabela departamentos';
 
 
 CREATE UNIQUE INDEX departamentos_idx
@@ -83,6 +86,8 @@ CREATE TABLE empregados (
                 PRIMARY KEY (id_empregado)
 );
 
+comment on table empregados is 'tabela empregados';
+
 
 CREATE UNIQUE INDEX empregados_idx
  ON empregados
@@ -96,6 +101,7 @@ CREATE TABLE historico_cargos (
                 id_departamento INT NOT NULL,
                 PRIMARY KEY (id_empregado, data_inicial)
 );
+comment on table historico_cargos is 'tabela historico_cargos';
 
 
 ALTER TABLE empregados ADD CONSTRAINT cargos_empregados_fk
@@ -152,6 +158,9 @@ REFERENCES empregados (id_empregado)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
 
+
+-- aqui começa os insert regioes
+
 INSERT INTO regioes (id_regiao,nome) VALUES
 ('1', 'Europe');
 INSERT INTO regioes (id_regiao,nome) VALUES
@@ -160,6 +169,8 @@ INSERT INTO regioes (id_regiao,nome) VALUES
 ('3', 'Asia');
 INSERT INTO regioes (id_regiao,nome) VALUES
 ('4', 'Middle East and Africa');
+
+-- aqui começa os insert paises
 
 INSERT INTO paises (id_pais, nome, id_regiao) VALUES
 ('AR', 'Argentina', 2);
@@ -212,6 +223,8 @@ INSERT INTO paises (id_pais, nome, id_regiao) VALUES
 INSERT INTO paises (id_pais, nome, id_regiao) VALUES
 ('ZW', 'Zimbabwe', 4);
 
+-- aqui começa os insert localizacoes
+
 INSERT INTO localizacoes (id_localizacoes, endereco, cep, cidade, uf, id_pais) VALUES
 (1000, '1297 Via Cola di Rie', '00989', 'Roma', 'null', 'IT');
 INSERT INTO localizacoes (id_localizacoes, endereco, cep, cidade, uf, id_pais) VALUES
@@ -259,6 +272,9 @@ INSERT INTO localizacoes (id_localizacoes, endereco, cep, cidade, uf, id_pais) V
 INSERT INTO localizacoes (id_localizacoes, endereco, cep, cidade, uf, id_pais) VALUES
 (3200, 'Mariano Escobedo 9991', '11932', 'Mexico City', 'Distrito Federal,', 'MX');
 
+-- aqui começa os insert cargos
+
+
 INSERT INTO cargos (id_cargo, cargo, salario_minimo, salario_maximo) VALUES
 ('AD_PRES', 'President', 20080, 40000);
 INSERT INTO cargos (id_cargo, cargo, salario_minimo, salario_maximo) VALUES
@@ -297,6 +313,9 @@ INSERT INTO cargos (id_cargo, cargo, salario_minimo, salario_maximo) VALUES
 ('HR_REP', 'Human Resources Representative', 4000, 9000);
 INSERT INTO cargos (id_cargo, cargo, salario_minimo, salario_maximo) VALUES
 ('PR_REP', 'Public Relations Representative', 4500, 10500);
+
+-- aqui começa os insert departamentos 
+
 
 INSERT INTO departamentos (id_departamento, nome, id_localizacoes) VALUES
 (10, 'Administration', 1700);
@@ -352,6 +371,10 @@ INSERT INTO departamentos (id_departamento, nome, id_localizacoes) VALUES
 (260, 'Recruiting', 1700);
 INSERT INTO departamentos (id_departamento, nome, id_localizacoes) VALUES
 (270, 'Payroll', 1700);
+
+-- aqui começa os insert empregados
+
+
 
 INSERT INTO empregados (id_empregado, nome, email,
 telefone, data_contratacao, id_cargo, salario,
@@ -782,6 +805,8 @@ telefone, data_contratacao, id_cargo, salario,
 comissao, id_supervisor, id_departamento) VALUES
 (206, 'William Gietz', 'WGIETZ', '515.123.8181', '2002-06-07', 'AC_ACCOUNT', 8300, null, 205, 110);
 
+-- aqui começa alguns updates
+
 UPDATE departamentos SET id_gerente='200' WHERE id_departamento=10;
 UPDATE departamentos SET id_gerente='201' WHERE id_departamento=20;
 UPDATE departamentos SET id_gerente='114' WHERE id_departamento=30;
@@ -809,6 +834,8 @@ UPDATE departamentos SET id_gerente=null WHERE id_departamento=240;
 UPDATE departamentos SET id_gerente=null WHERE id_departamento=250;
 UPDATE departamentos SET id_gerente=null WHERE id_departamento=260;
 UPDATE departamentos SET id_gerente=null WHERE id_departamento=270;
+
+-- aqui começa os insert cargos
 
 INSERT INTO historico_cargos (id_empregado, data_inicial,
 data_final, id_cargo, id_departamento) VALUES
