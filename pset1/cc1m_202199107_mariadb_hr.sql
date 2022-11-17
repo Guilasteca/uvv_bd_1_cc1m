@@ -17,7 +17,7 @@ CREATE TABLE cargos (
 
 
 CREATE TABLE regioes (
-                Id_regiao VARCHAR NOT NULL,
+                Id_regiao INT NOT NULL,
                 nome VARCHAR(25) NOT NULL,
                 PRIMARY KEY (Id_regiao)
 );
@@ -26,7 +26,7 @@ CREATE TABLE regioes (
 CREATE TABLE paises (
                 id_pais CHAR(2) NOT NULL,
                 nome VARCHAR(50) NOT NULL,
-                Id_regiao VARCHAR NOT NULL,
+                Id_regiao INT NOT NULL,
                 PRIMARY KEY (id_pais)
 );
 
